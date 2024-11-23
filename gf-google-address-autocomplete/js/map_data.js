@@ -40,7 +40,7 @@ $j(document).bind("gform_post_render", function (event, form_id) {
 
         var aac_input = document.getElementById(aac_id);
         aac_input.addEventListener( "keydown", function (event) {
-            if (event.keyCode === 13) {
+            if (event.key === "Enter") {
                 event.preventDefault();
             }
         });

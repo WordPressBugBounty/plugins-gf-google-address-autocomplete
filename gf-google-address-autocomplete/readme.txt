@@ -1,9 +1,9 @@
 === Address Autocomplete via Google for Gravity Forms ===
 Contributors: kaisarahmmed
 Tags: Gravityforms, Address, Autocomplete, Google place api, geolocation
-Requires at least: 4.0
+Requires at least: 5.0
 Requires PHP: 5.6
-Tested up to: 6.6.1
+Tested up to: 6.7.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
@@ -18,7 +18,7 @@ You can see 'Enable Autocomplete with Google Places API', Just click on enable a
 = Requirements =
 
 * PHP 5.6 or higher
-* Gravity Forms 2.6.0 or higher
+* Gravity Forms 2.8.0 or higher
 
 
 
@@ -27,6 +27,10 @@ Installation is fairly straight forward. Install it from the WordPress plugin re
 
 
 == Change log ==
+
+= 1.3.4 = 
+* Fix google place api load issue
+* Update codes
 
 = 1.3.3 =
 * Fix city field issue.
