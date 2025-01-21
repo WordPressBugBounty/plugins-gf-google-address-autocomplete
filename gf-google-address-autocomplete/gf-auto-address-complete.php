@@ -4,7 +4,7 @@ Plugin Name: Address Autocomplete via Google for Gravity Forms
 Plugin Url: https://pluginscafe.com
 Version: 1.3.4
 Description: This plugin adds autocomplete/suggestion feature to gravity forms address field with google map api
-Author: KaisarAhmmed
+Author: Pluginscafe
 Author URI: https://pluginscafe.com
 License: GPLv2 or later
 Text Domain: gravityforms

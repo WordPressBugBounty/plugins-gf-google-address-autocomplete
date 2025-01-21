@@ -1,5 +1,6 @@
 === Address Autocomplete via Google for Gravity Forms ===
-Contributors: kaisarahmmed
+Author: Pluginscafe
+Contributors: pluginscafe, kaisarahmmed
 Tags: Gravityforms, Address, Autocomplete, Google place api, geolocation
 Requires at least: 5.0
 Requires PHP: 5.6
