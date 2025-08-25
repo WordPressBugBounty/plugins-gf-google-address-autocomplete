@@ -21,7 +21,7 @@ class PCAFE_AAC_Frontend {
         const init_selector = document.getElementById(field_id);
 
         if (!init_selector) {
-            console.logo(`Element with ID ${field_id} not found`);
+            console.log(`Element with ID ${field_id} not found`);
             return;
         }
 
@@ -32,6 +32,7 @@ class PCAFE_AAC_Frontend {
 
         var options = {
             types: ["geocode"],
+            fields: ['address_components', 'formatted_address', 'geometry'],
 		};
 
         if (this.options.restrict_countries?.length > 0) {
@@ -43,6 +44,8 @@ class PCAFE_AAC_Frontend {
         google.maps.event.addListener( autocomplete, 'place_changed', () => {
             
             var place = autocomplete.getPlace();
+
+            console.log(place);
             
             var result = this.get_location(place, this.options.formId, this.options.fieldId);
 
@@ -173,9 +176,9 @@ class PCAFE_AAC_Frontend {
 
         // Compute street field
         if (address_data.street_name) {
-            address_data.street = address_data.street_number
-                ? `${address_data.street_number}${address_data.subpremise ? `/${address_data.subpremise}` : ''} ${address_data.street_name}`
-                : address_data.street_name;
+            var street = address_data.street_number ? `${address_data.subpremise}${address_data.street_number} ${address_data.street_name}` : `${address_data.subpremise} ${address_data.street_name}`;
+            address_data.street = address_data.address? address_data.address.split(',')[0] : street;
+
             if (document.querySelector(`.pcafe_${sourceId}.pcafe_street`)) {
                 this.trigger_location_data(sourceId, 'street', address_data.street);
             }

@@ -39,14 +39,12 @@ class GFAutoAddressComplete extends GFAddOn {
         add_action('gform_editor_js', [$this, 'editor_script']);
         add_filter('gform_register_init_scripts', [$this, 'add_init_script'], 10, 2);
 
-        add_filter('gform_addon_navigation', [$this, 'api_key_menu_item']);
         add_filter('gform_field_settings_tabs', [$this, 'pcafe_aac_fields_settings_tab'], 10, 2);
         add_action('gform_field_settings_tab_content_address_auto_complete', [$this, 'pcafe_aac_fields_settings_tab_content'], 10, 2);
     }
 
     public function get_menu_icon() {
-        // return 'gform-icon--place';
-        return '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>';
+        return 'gform-icon--place';
     }
 
     /**
@@ -92,7 +90,7 @@ class GFAutoAddressComplete extends GFAddOn {
             array(
                 'handle'    => 'pcafe_aac_script',
                 'src'       => $this->get_base_url() . '/js/pcafe_aac_active.js',
-                'version'   => time(),
+                'version'   => $this->_version,
                 'deps'      => array('jquery', 'pcafe_maps_api_js'),
                 'enqueue'  => $frontend_enqueue_condition,
                 'in_footer' => true
@@ -290,27 +288,9 @@ class GFAutoAddressComplete extends GFAddOn {
                 jQuery("#pc_text_field_autocomplete_value").prop('checked', Boolean(rgar(field, 'textAutocompleteGField')));
             });
         </script>
-    <?php
-    }
-
-    public function api_key_menu_item($menu_items) {
-        $menu_items[] = array(
-            "name"          => "pc_gf_api_key_settings",
-            "label"         => "Autocomplete API Settings",
-            "callback"      => [$this, "pcafe_gf_api_key_set_fields"],
-            "permission"    => "manage_options"
-        );
-        return $menu_items;
-    }
-
-    public function pcafe_gf_api_key_set_fields() {
-    ?>
-        <div class="wrap">
-            <h3><?php esc_html_e("Gravity Forms Address Autocomplete Settings", "gf-google-address-autocomplete"); ?></h3>
-            <a target="_blank" href="<?php echo esc_url(admin_url('admin.php?page=gf_settings&subview=gf-google-address-autocomplete')); ?>" class="button button-large button-primary"><?php esc_html_e("Go To Setting Page", "gf-google-address-autocomplete"); ?></a>
-        </div>
 <?php
     }
+
 
     public function plugin_settings_fields() {
         $api_key    =    get_option('pc_gf_google_api_key') ? get_option('pc_gf_google_api_key') : '';

@@ -5,7 +5,7 @@ Tags: Gravityforms, Address, Autocomplete, Google place api, geolocation
 Requires at least: 5.0
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 
@@ -28,6 +28,10 @@ Installation is fairly straight forward. Install it from the WordPress plugin re
 
 
 == Change log ==
+
+= 1.3.6 =
+* Fixed street address bug
+* Fixed js issue
 
 = 1.3.5 =
 * Add new settings

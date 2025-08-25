@@ -2,7 +2,7 @@
 /*
 Plugin Name: Address Autocomplete via Google for Gravity Forms
 Plugin Url: https://pluginscafe.com
-Version: 1.3.5
+Version: 1.3.6
 Description: This plugin adds autocomplete/suggestion feature to gravity forms address field with google map api
 Author: PluginsCafe
 Author URI: https://pluginscafe.com
@@ -12,7 +12,7 @@ Text Domain: gf-google-address-autocomplete
 
 defined('ABSPATH') || die();
 
-define('GF_AUTO_ADDRESS_COMPLETE_VERSION_NUM', '1.3.5');
+define('GF_AUTO_ADDRESS_COMPLETE_VERSION_NUM', '1.3.6');
 define('GF_AUTO_ADDRESS_COMPLETE_FILE', __FILE__);
 define('GF_AUTO_ADDRESS_COMPLETE_PATH', plugin_dir_path(__FILE__));
 define('GF_AUTO_ADDRESS_COMPLETE_URL', plugin_dir_url(__FILE__));
