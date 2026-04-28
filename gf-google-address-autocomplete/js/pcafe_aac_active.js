@@ -1,5 +1,5 @@
 class PCAFE_AAC_Frontend {
-    constructor( options ) {
+    constructor(options) {
         if (!options || !options.input || !options.formId || !options.fieldId) {
             throw new Error('Missing required options: input, formId, or fieldId');
         }
@@ -33,20 +33,18 @@ class PCAFE_AAC_Frontend {
         var options = {
             types: ["geocode"],
             fields: ['address_components', 'formatted_address', 'geometry'],
-		};
+        };
 
         if (this.options.restrict_countries?.length > 0) {
             options.componentRestrictions = { country: this.options.restrict_countries };
         }
 
-        const autocomplete = new google.maps.places.Autocomplete( init_selector, options );
+        const autocomplete = new google.maps.places.Autocomplete(init_selector, options);
 
-        google.maps.event.addListener( autocomplete, 'place_changed', () => {
-            
+        google.maps.event.addListener(autocomplete, 'place_changed', () => {
+
             var place = autocomplete.getPlace();
 
-            console.log(place);
-            
             var result = this.get_location(place, this.options.formId, this.options.fieldId);
 
             if (this.options.type === 'address' && this.options.single_line) {
@@ -89,28 +87,28 @@ class PCAFE_AAC_Frontend {
         });
     }
 
-    get_location( results, formId, fieldId ) {
+    get_location(results, formId, fieldId) {
 
-        var address     = results.address_components || [],
-            sourceId    = formId + '_' + fieldId;
-        
+        var address = results.address_components || [],
+            sourceId = formId + '_' + fieldId;
+
         var address_data = {
-            'street_number'     : '',
-            'street_name'       : '',
-            'street'            : '',
-            'subpremise'        : '',
-            'premise'           : '',
-            'city'              : '',
-            'region_code'       : '',
-            'region_name'       : '',
-            'neighborhood'      : '',
-            'postal_code'          : '',
-            'country_code'      : '',
-            'country_name'      : '',
-            'address'           : results.formatted_address,
-            'latitude'          : results.geometry.location.lat() || '',
-            'longitude'         : results.geometry.location.lng() || '',
-            'place_id'			: results.place_id || ''
+            'street_number': '',
+            'street_name': '',
+            'street': '',
+            'subpremise': '',
+            'premise': '',
+            'city': '',
+            'region_code': '',
+            'region_name': '',
+            'neighborhood': '',
+            'postal_code': '',
+            'country_code': '',
+            'country_name': '',
+            'address': results.formatted_address,
+            'latitude': results.geometry.location.lat() || '',
+            'longitude': results.geometry.location.lng() || '',
+            'place_id': results.place_id || ''
         };
 
         const commonFields = [
@@ -171,13 +169,13 @@ class PCAFE_AAC_Frontend {
                     }
                 }
             });
-    
+
         });
 
         // Compute street field
         if (address_data.street_name) {
             var street = address_data.street_number ? `${address_data.subpremise}${address_data.street_number} ${address_data.street_name}` : `${address_data.subpremise} ${address_data.street_name}`;
-            address_data.street = address_data.address? address_data.address.split(',')[0] : street;
+            address_data.street = address_data.address ? address_data.address.split(',')[0] : street;
 
             if (document.querySelector(`.pcafe_${sourceId}.pcafe_street`)) {
                 this.trigger_location_data(sourceId, 'street', address_data.street);

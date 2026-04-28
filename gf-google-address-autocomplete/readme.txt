@@ -2,10 +2,10 @@
 Author: PluginsCafe
 Contributors: pluginscafe, kaisarahmmed
 Tags: Gravityforms, Address, Autocomplete, Google place api, geolocation
-Requires at least: 5.0
-Requires PHP: 5.6
-Tested up to: 6.8
-Stable tag: 1.3.6
+Requires at least: 6.0
+Requires PHP: 7.4
+Tested up to: 6.9
+Stable tag: 1.3.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 
@@ -16,11 +16,27 @@ A simple and nice plugin to get auto suggestion from google place api in gravity
 
 You can see 'Enable Autocomplete with Google Places API', Just click on enable and save form. You're done!
 
+[View Pro Demo](https://demo.pluginscafe.com/address-autocomplete-for-gravity-forms-pro/) | [Documentation](https://pluginscafe.com/docs/address-autocomplete-for-gravity-forms-pro/) | [Buy Pro](https://pluginscafe.com/plugin/address-autocomplete-for-gravity-forms/)
+
+== Features ==
+* Address Autocomplete in address and single field
+* Country Restriction
+
+
+== Premium Features ==
+* Map field
+* Distance Calculation
+* Place Details
+* 3 Type Restriction
+* Place type (School, Restaurant, cities, addresses and more)
+* Location Button
+* Place API (New)
+* and more...
+
 = Requirements =
 
-* PHP 5.6 or higher
-* Gravity Forms 2.8.0 or higher
-
+* PHP 7.4 or higher
+* Gravity Forms 2.9.0 or higher
 
 
 == Installation ==
@@ -28,6 +44,10 @@ Installation is fairly straight forward. Install it from the WordPress plugin re
 
 
 == Change log ==
+
+= 1.3.7 =
+* Add Freemius SDK
+* Introduce Pro version
 
 = 1.3.6 =
 * Fixed street address bug
