@@ -4,8 +4,8 @@ Contributors: pluginscafe, kaisarahmmed
 Tags: Gravityforms, Address, Autocomplete, Google place api, geolocation
 Requires at least: 6.0
 Requires PHP: 7.4
-Tested up to: 6.9
-Stable tag: 1.3.7
+Tested up to: 7.0
+Stable tag: 1.3.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 
@@ -44,6 +44,9 @@ Installation is fairly straight forward. Install it from the WordPress plugin re
 
 
 == Change log ==
+= 1.3.8 =
+* Update Freemius SDK
+* Fix minor issues
 
 = 1.3.7 =
 * Add Freemius SDK

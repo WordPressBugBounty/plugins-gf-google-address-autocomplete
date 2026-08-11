@@ -4,46 +4,79 @@ class PCAFE_AAC_Frontend {
             throw new Error('Missing required options: input, formId, or fieldId');
         }
         this.options = options;
+        this.autocomplete = null;
         this.init();
     }
-    init() {
-        if (this.options.is_async) {
-            setTimeout(() => {
-                this.init_autocomplete();
-            }, 1500);
-        } else {
-            this.init_autocomplete();
+
+    static isGooglePlacesReady() {
+        return Boolean(
+            window.google &&
+            window.google.maps &&
+            window.google.maps.places &&
+            window.google.maps.places.Autocomplete
+        );
+    }
+
+    static waitForGooglePlaces(timeout = 30000, interval = 100) {
+        if (PCAFE_AAC_Frontend.isGooglePlacesReady()) {
+            return Promise.resolve();
         }
+
+        return new Promise((resolve, reject) => {
+            const startedAt = Date.now();
+            const timer = setInterval(() => {
+                if (PCAFE_AAC_Frontend.isGooglePlacesReady()) {
+                    clearInterval(timer);
+                    resolve();
+                    return;
+                }
+
+                if (Date.now() - startedAt >= timeout) {
+                    clearInterval(timer);
+                    reject(new Error('Google Maps Places API not loaded'));
+                }
+            }, interval);
+        });
+    }
+
+    init() {
+        PCAFE_AAC_Frontend.waitForGooglePlaces()
+            .then(() => this.init_autocomplete())
+            .catch((error) => console.warn(error.message));
     }
 
     init_autocomplete() {
+        if (this.autocomplete) {
+            return;
+        }
+
         const field_id = this.options.type === 'address' ? `${this.options.input}_1` : this.options.input;
         const init_selector = document.getElementById(field_id);
 
         if (!init_selector) {
-            console.log(`Element with ID ${field_id} not found`);
+            console.warn(`Element with ID ${field_id} not found`);
             return;
         }
 
-        if (!window.google || !window.google.maps || !window.google.maps.places) {
-            console.log('Google Maps API not loaded');
+        if (!PCAFE_AAC_Frontend.isGooglePlacesReady()) {
+            console.warn('Google Maps Places API not loaded');
             return;
         }
 
         var options = {
             types: ["geocode"],
-            fields: ['address_components', 'formatted_address', 'geometry'],
+            fields: ['address_components', 'formatted_address', 'geometry', 'place_id'],
         };
 
         if (this.options.restrict_countries?.length > 0) {
             options.componentRestrictions = { country: this.options.restrict_countries };
         }
 
-        const autocomplete = new google.maps.places.Autocomplete(init_selector, options);
+        this.autocomplete = new google.maps.places.Autocomplete(init_selector, options);
 
-        google.maps.event.addListener(autocomplete, 'place_changed', () => {
+        google.maps.event.addListener(this.autocomplete, 'place_changed', () => {
 
-            var place = autocomplete.getPlace();
+            var place = this.autocomplete.getPlace();
 
             var result = this.get_location(place, this.options.formId, this.options.fieldId);
 
@@ -106,8 +139,8 @@ class PCAFE_AAC_Frontend {
             'country_code': '',
             'country_name': '',
             'address': results.formatted_address,
-            'latitude': results.geometry.location.lat() || '',
-            'longitude': results.geometry.location.lng() || '',
+            'latitude': results.geometry?.location?.lat() || '',
+            'longitude': results.geometry?.location?.lng() || '',
             'place_id': results.place_id || ''
         };
 

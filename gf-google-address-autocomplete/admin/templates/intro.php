@@ -50,7 +50,7 @@ $features = [
         'icon' => 'distance.png'
     ],
     'place_api' => [
-        'title' => __('Place API (new) - (Beta)', 'gf-google-address-autocomplete'),
+        'title' => __('Place API (new)', 'gf-google-address-autocomplete'),
         'desc' => __('Address Autocomplete Pro now supports the new Google Places API. With this feature, you will receive address suggestions powered by the latest Places API. Simply enable the New Places API toggle in the Gravity Forms settings, and it will automatically activate for all address fields in Gravity Forms. There is a option to disable on specific form also.', 'gf-google-address-autocomplete'),
         'icon' => 'new_place_api.png'
     ],
